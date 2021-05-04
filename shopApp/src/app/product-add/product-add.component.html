@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Products</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2>Ajouter un produit</h2>
+  <div>
+    <ion-label>Nom </ion-label><ion-input type="text" [(ngModel)]="product.name" placeholder="Entrer le nom"></ion-input><br>
+    <ion-label>Prix</ion-label> <ion-input type="number" [(ngModel)]="product.price" placeholder="Entrer le prix"></ion-input><br>
+    <ion-label>Description </ion-label><ion-input type="text" [(ngModel)]="product.description" placeholder="Entrer la description"></ion-input><br>
+    <ion-label>Url </ion-label><ion-input type="text" [(ngModel)]="product.url" placeholder="Entrer l'url de l'image"></ion-input><br>
+    <ion-button (click)="addProduct()"> Ajouter </ion-button>
+  </div>
+</ion-content>

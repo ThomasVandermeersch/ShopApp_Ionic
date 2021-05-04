@@ -8,7 +8,11 @@
 </ion-header>
 
 <ion-content padding>
-
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button [routerLink]="['/product/add']" name="add">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
  
   <ion-list>
     <ion-item *ngFor="let p of products; let i=index">
