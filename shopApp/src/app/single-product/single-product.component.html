@@ -1,3 +1,17 @@
-<p>
-  single-product works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <h1>{{productName}}</h1>
+  <h2>  Prix : {{productPrice}} € </h2>
+
+  <ion-label> Description : {{productDescription}} </ion-label>
+</ion-content>
