@@ -15,4 +15,9 @@
 
   <ion-label> Description : {{productDescription}} </ion-label>
   <ion-img [src]="productUrl"></ion-img>
+
+  <ion-button (click)="close()" [routerLink]="['/product/add']" [queryParams]="{modify:productId}"> Modifier
+  </ion-button>
+
+
 </ion-content>

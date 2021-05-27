@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 import {ProductService} from '../services/product.service'
 import { ActivatedRoute,Router } from "@angular/router";
 
@@ -9,6 +9,8 @@ import { ActivatedRoute,Router } from "@angular/router";
 })
 
 export class ProductAddComponent implements OnInit {
+  @Input() verbose = "Ajouter"
+
   product =  {
     name:"",
     url:"",
@@ -21,9 +23,11 @@ export class ProductAddComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.route.snapshot.queryParams.modify){
+      console.log("hellooo")
       this.productId = this.route.snapshot.queryParams.modify
       this.product = this.service.getProduct(this.productId)
       this.statusModify = true;
+      this.verbose = "Modifier"
     }
   }
 
@@ -31,12 +35,14 @@ export class ProductAddComponent implements OnInit {
     if(!this.statusModify){
       console.log(this.product)
       this.service.addProduct(this.product).subscribe((result)=>{
+        this.service.isLoaded = false;
         this.router.navigate(['/product'])
      })
     }
     else{
       this.service.updateProduct(this.productId,this.product).subscribe((result)=>{
-        this.router.navigate(['/'])
+        this.service.isLoaded = false;
+        this.router.navigate(['/product'])
       })
     }
   }

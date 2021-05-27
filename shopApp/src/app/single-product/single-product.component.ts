@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import {ModalController} from '@ionic/angular'
+import { ActivatedRoute,Router } from "@angular/router";
 
 
 @Component({
@@ -17,7 +18,8 @@ export class SingleProductComponent implements OnInit {
   @Input() productDescription: string;
 
 
-  constructor(private service: ProductService,private modalCtrl:ModalController) { }
+
+  constructor(private service: ProductService,private modalCtrl:ModalController,private router:Router) { }
 
   ngOnInit(): void {
     console.log('Product URL : ' + this.productUrl )
@@ -25,18 +27,4 @@ export class SingleProductComponent implements OnInit {
   async close(){
     await this.modalCtrl.dismiss();
   }
-
-
-
-  remove(id){
-    console.log("Remove : " + id)
-    this.service.removeProduct(id).subscribe((resp)=>{
-      console.log(resp)
-    })
-  }
-
-  modify(id){
-    console.log("Modify : " + id)
-  }
-
 }

@@ -3,7 +3,9 @@ import {catchError} from 'rxjs/internal/operators';
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http'
 import {Observable, queueScheduler, throwError} from 'rxjs';
 
-const endpoint = 'http://localhost:8000/api/'
+//const endpoint = 'http://localhost:8000/api/' // endpoint to Symfony
+const endpoint = 'http://10.0.0.54:9000/api/' // endpoint when using on phone
+
 
 @Injectable({
   providedIn: 'root'

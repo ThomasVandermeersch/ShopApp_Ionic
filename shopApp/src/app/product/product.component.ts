@@ -18,72 +18,35 @@ export class ProductComponent implements OnInit {
   constructor(private productService : ProductService,private modalCtrl:ModalController) {}
 
   ngOnInit() {
+    this.getProducts()
+  }
 
-
-
-    if(!this.productService.isLoaded){
-      // this.productSubscription = this.productService.productSubject.subscribe(
-      //   (products: any[]) => {
-      //     this.products = products;
-      //   }
-      // );
-      // this.productService.emitProductSubject();
+  getProducts(){
       this.productService.getProductsFromServer().subscribe((resp=>{
-        console.log(resp)
-        this.products = resp
-        this.productService.products = resp
-        console.log(resp)
-      }));
-      this.productService.isLoaded = true;
-    }
-    else{
-      this.products = this.productService.products;
-    }
-
+      this.products = resp
+      this.productService.products = resp
+    }));
   }
 
   async showModal(id){        
-    
     const product = this.productService.getProduct(id)
-    console.log("Product")
-    console.log(product)
-
     const modal = await this.modalCtrl.create({
       component: SingleProductComponent,
       componentProps:{
         productName: product.name,
         productDescription: product.description,
         productPrice: product.price,
-        productUrl: product.url
+        productUrl: product.url,
+        productId:product.id
       }
-
     })
     await modal.present();
-
   }
 
-  filter(value){
-
-    if(value==""){
-      this.products = this.productService.products
-    }
-    else{
-      value = value.toLowerCase()
-      const filterList = []
-      this.productService.products.forEach((product)=>{
-        console.log(product.name)
-        console.log(value)
-        console.log(compareTwoStrings(product.name,value))
-        if(  compareTwoStrings(product.name.toLowerCase(),value) >0.65){
-          filterList.push(product)
-        }
-      })
-      this.products = filterList
-    }
+  remove(id){
+    console.log("iddd : " + id)
+    this.productService.removeProduct(id).subscribe(async (resp)=>{
+      this.getProducts()
+    })
   }
-
-  clearFilter(){
-    this.products = this.productService.products
-  }
-
 }
