@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
-import { compareTwoStrings} from 'string-similarity';
 import {ModalController} from '@ionic/angular'
 import {SingleProductComponent} from '../single-product/single-product.component'
-import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
@@ -13,13 +11,15 @@ import { NgModel } from '@angular/forms';
 export class ProductComponent implements OnInit {
   products: any[];
   
-
-
   constructor(private productService : ProductService,private modalCtrl:ModalController) {}
 
   ngOnInit() {
     this.getProducts()
   }
+
+  ionViewWillEnter() {
+    this.getProducts();
+}
 
   getProducts(){
       this.productService.getProductsFromServer().subscribe((resp=>{
@@ -44,7 +44,6 @@ export class ProductComponent implements OnInit {
   }
 
   remove(id){
-    console.log("iddd : " + id)
     this.productService.removeProduct(id).subscribe(async (resp)=>{
       this.getProducts()
     })

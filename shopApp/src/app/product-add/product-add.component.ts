@@ -23,7 +23,6 @@ export class ProductAddComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.route.snapshot.queryParams.modify){
-      console.log("hellooo")
       this.productId = this.route.snapshot.queryParams.modify
       this.product = this.service.getProduct(this.productId)
       this.statusModify = true;
@@ -35,16 +34,13 @@ export class ProductAddComponent implements OnInit {
     if(!this.statusModify){
       console.log(this.product)
       this.service.addProduct(this.product).subscribe((result)=>{
-        this.service.isLoaded = false;
         this.router.navigate(['/product'])
      })
     }
     else{
       this.service.updateProduct(this.productId,this.product).subscribe((result)=>{
-        this.service.isLoaded = false;
         this.router.navigate(['/product'])
       })
     }
   }
-
 }
