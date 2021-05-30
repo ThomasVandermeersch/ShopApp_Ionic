@@ -21,6 +21,7 @@ export class ProductService {
       .get<any[]>(endpoint + 'product')
   }
 
+  // Get a specific product from the product list. 
   getProduct(id){
     var product = null;
     this.products.forEach(elem =>{
@@ -38,15 +39,15 @@ export class ProductService {
 
   }
 
-  addProduct(product): Observable<any>{
+  addProduct(product): Observable<any>{ // Add product to the API
     return this.http.post(endpoint + 'product/new',product)
   }
 
-  removeProduct(productId): Observable<any>{
+  removeProduct(productId): Observable<any>{ // Remove product of the API
     return this.http.delete(endpoint + 'product/remove/'+productId)
   }
 
-  updateProduct(productId, product): Observable<any>{
+  updateProduct(productId, product): Observable<any>{ // Update products of the API
     return this.http.put(endpoint + 'product/modify/' + productId, product)
   }
 }

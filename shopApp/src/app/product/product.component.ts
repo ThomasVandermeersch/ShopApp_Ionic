@@ -18,20 +18,22 @@ export class ProductComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.getProducts();
+    this.getProducts(); //Reload products in case of update of the API
 }
 
-  getProducts(){
+  getProducts(){ //Get product from the API
       this.productService.getProductsFromServer().subscribe((resp=>{
       this.products = resp
       this.productService.products = resp
     }));
   }
 
-  async showModal(id){        
+  async showModal(id){  //A modal is a windows that opens in front plane when clicking on a product name.
+                        // the modal contains the product details 
     const product = this.productService.getProduct(id)
     const modal = await this.modalCtrl.create({
       component: SingleProductComponent,
+      // Content of the modal
       componentProps:{
         productName: product.name,
         productDescription: product.description,
@@ -43,7 +45,7 @@ export class ProductComponent implements OnInit {
     await modal.present();
   }
 
-  remove(id){
+  remove(id){ //remove a product
     this.productService.removeProduct(id).subscribe(async (resp)=>{
       this.getProducts()
     })

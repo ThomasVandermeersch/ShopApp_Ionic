@@ -18,7 +18,7 @@ export class SingleProductComponent {
 
   constructor(private modalCtrl:ModalController) { }
 
-  async close(){
+  async close(){ // close the modal. The modal is a window containing product details.
     await this.modalCtrl.dismiss();
   }
 }
